@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting to Birthday Game...</title>
+    <meta http-equiv="refresh" content="0; url=birthday-game.html">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffeef8 0%, #e8d5ff 100%);
+            font-family: 'Arial', sans-serif;
+        }
+
+        .loading {
+            text-align: center;
+        }
+
+        .loading h1 {
+            color: #c44569;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 107, 157, 0.3);
+            border-top-color: #ff6b9d;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading">
+        <h1>🎉 Loading Birthday Surprise... 🎉</h1>
+        <div class="spinner"></div>
+    </div>
+    <script>
+        // Fallback redirect if meta refresh doesn't work
+        setTimeout(() => {
+            window.location.href = 'birthday-game.html';
+        }, 100);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="coinGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFA500;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF8C00;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="waterGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00D4FF;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#0099CC;stop-opacity:0.9" />
+    </linearGradient>
+    
+    <radialGradient id="glowGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#FFD700;stop-opacity:0" />
+    </radialGradient>
+    
+    <linearGradient id="blockchainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6B46C1;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#00D4FF;stop-opacity:0.3" />
+    </linearGradient>
+    
+    <!-- Filter for glassmorphism -->
+    <filter id="blur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+    </filter>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="200" cy="200" r="190" fill="url(#blockchainGradient)" opacity="0.2"/>
+  
+  <!-- Water splash base -->
+  <ellipse cx="200" cy="280" rx="120" ry="40" fill="url(#waterGradient)" opacity="0.6" filter="url(#blur)"/>
+  
+  <!-- Water droplets -->
+  <circle cx="140" cy="260" r="15" fill="url(#waterGradient)" opacity="0.7">
+    <animate attributeName="cy" values="260;240;260" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="260" cy="270" r="12" fill="url(#waterGradient)" opacity="0.7">
+    <animate attributeName="cy" values="270;250;270" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="200" cy="265" r="18" fill="url(#waterGradient)" opacity="0.8">
+    <animate attributeName="cy" values="265;245;265" dur="1.8s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Main coin -->
+  <circle cx="200" cy="150" r="80" fill="url(#coinGradient)" stroke="#CC8800" stroke-width="4"/>
+  
+  <!-- Coin inner circle -->
+  <circle cx="200" cy="150" r="70" fill="none" stroke="#FFE55C" stroke-width="2" opacity="0.6"/>
+  
+  <!-- Blockchain hexagon pattern on coin -->
+  <g opacity="0.3">
+    <polygon points="200,120 215,128 215,144 200,152 185,144 185,128" fill="none" stroke="#CC8800" stroke-width="1.5"/>
+    <polygon points="170,135 185,143 185,159 170,167 155,159 155,143" fill="none" stroke="#CC8800" stroke-width="1.5"/>
+    <polygon points="230,135 245,143 245,159 230,167 215,159 215,143" fill="none" stroke="#CC8800" stroke-width="1.5"/>
+  </g>
+  
+  <!-- Coin highlight -->
+  <ellipse cx="180" cy="130" rx="25" ry="20" fill="url(#glowGradient)" opacity="0.8"/>
+  
+  <!-- Dollar sign on coin -->
+  <text x="200" y="170" font-family="Arial, sans-serif" font-size="60" font-weight="bold" fill="#CC8800" text-anchor="middle">$</text>
+  
+  <!-- Motion lines (physics effect) -->
+  <line x1="200" y1="70" x2="200" y2="50" stroke="#FFD700" stroke-width="3" opacity="0.6" stroke-linecap="round">
+    <animate attributeName="opacity" values="0.6;0.2;0.6" dur="1.5s" repeatCount="indefinite"/>
+  </line>
+  <line x1="220" y1="80" x2="235" y2="65" stroke="#FFD700" stroke-width="2.5" opacity="0.5" stroke-linecap="round">
+    <animate attributeName="opacity" values="0.5;0.1;0.5" dur="1.7s" repeatCount="indefinite"/>
+  </line>
+  <line x1="180" y1="80" x2="165" y2="65" stroke="#FFD700" stroke-width="2.5" opacity="0.5" stroke-linecap="round">
+    <animate attributeName="opacity" values="0.5;0.1;0.5" dur="1.6s" repeatCount="indefinite"/>
+  </line>
+  
+  <!-- Web3 connection nodes -->
+  <circle cx="280" cy="120" r="5" fill="#00D4FF" opacity="0.8">
+    <animate attributeName="r" values="5;7;5" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="120" cy="120" r="5" fill="#00D4FF" opacity="0.8">
+    <animate attributeName="r" values="5;7;5" dur="2.2s" repeatCount="indefinite"/>
+  </circle>
+  <line x1="200" y1="150" x2="280" y2="120" stroke="#00D4FF" stroke-width="1" opacity="0.4" stroke-dasharray="3,3"/>
+  <line x1="200" y1="150" x2="120" y2="120" stroke="#00D4FF" stroke-width="1" opacity="0.4" stroke-dasharray="3,3"/>
+</svg>

@@ -1,0 +1,552 @@
+/* ===== CSS Variables & Design System ===== */
+:root {
+    /* Color Palette - Cool Vibe Theme */
+    --primary-pink: #ff6b9d;
+    --primary-purple: #c44569;
+    --secondary-lavender: #a29bfe;
+    --secondary-blue: #74b9ff;
+    --accent-gold: #ffd700;
+    --bg-gradient-start: #ffeef8;
+    --bg-gradient-end: #e8d5ff;
+    
+    /* Glassmorphism */
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --glass-shadow: rgba(142, 68, 173, 0.2);
+    
+    /* Typography */
+    --font-primary: 'Poppins', sans-serif;
+    --font-fancy: 'Dancing Script', cursive;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* ===== Reset & Base Styles ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+}
+
+/* Cute Teddy Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('assets/teddy.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ===== Particle Canvas ===== */
+#particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* ===== Game Container ===== */
+.game-container {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-md);
+}
+
+/* ===== Screen Management ===== */
+.screen {
+    display: none;
+    animation: fadeIn 0.6s ease;
+}
+
+.screen.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== Glass Card Effect ===== */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 30px;
+    border: 2px solid var(--glass-border);
+    box-shadow: 0 8px 32px var(--glass-shadow);
+    padding: var(--spacing-xl);
+    max-width: 600px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+/* ===== Welcome Screen ===== */
+.welcome-card {
+    text-align: center;
+}
+
+.birthday-title {
+    font-family: var(--font-fancy);
+    font-size: 3rem;
+    background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple), var(--secondary-lavender));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: var(--spacing-md);
+    animation: titleFloat 3s ease-in-out infinite;
+}
+
+@keyframes titleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.welcome-text {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--primary-purple);
+    margin-bottom: var(--spacing-sm);
+}
+
+.welcome-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.6;
+}
+
+/* ===== Question Card ===== */
+.question-header {
+    margin-bottom: var(--spacing-lg);
+}
+
+.question-number {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-purple);
+    margin-bottom: var(--spacing-sm);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: var(--spacing-sm);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-pink), var(--secondary-lavender));
+    border-radius: 10px;
+    transition: width var(--transition-slow);
+}
+
+.question-text {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--primary-purple);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+}
+
+/* ===== Options ===== */
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.option-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: rgba(255, 255, 255, 0.6);
+    border: 2px solid var(--glass-border);
+    border-radius: 20px;
+    font-family: var(--font-primary);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.option-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-pink), var(--secondary-lavender));
+    opacity: 0.3;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.option-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.option-btn:hover {
+    transform: translateX(10px);
+    border-color: var(--primary-pink);
+    box-shadow: 0 5px 20px rgba(255, 107, 157, 0.3);
+}
+
+.option-letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
+    color: white;
+    border-radius: 50%;
+    font-weight: 700;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.option-text {
+    position: relative;
+    z-index: 1;
+}
+
+.option-btn.correct {
+    background: rgba(46, 213, 115, 0.3);
+    border-color: #2ed573;
+    animation: correctPulse 0.5s ease;
+}
+
+.option-btn.wrong {
+    background: rgba(255, 71, 87, 0.3);
+    border-color: #ff4757;
+    animation: wrongShake 0.5s ease;
+}
+
+@keyframes correctPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes wrongShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+/* ===== Text Input ===== */
+.text-input-container {
+    margin-bottom: var(--spacing-lg);
+}
+
+.text-input {
+    width: 100%;
+    padding: var(--spacing-md);
+    font-family: var(--font-primary);
+    font-size: 1.1rem;
+    background: rgba(255, 255, 255, 0.6);
+    border: 2px solid var(--glass-border);
+    border-radius: 15px;
+    outline: none;
+    transition: all var(--transition-normal);
+}
+
+.text-input:focus {
+    border-color: var(--primary-pink);
+    box-shadow: 0 0 20px rgba(255, 107, 157, 0.3);
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* ===== Buttons ===== */
+.btn {
+    position: relative;
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-family: var(--font-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all var(--transition-normal);
+    box-shadow: 0 5px 20px rgba(196, 69, 105, 0.4);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(196, 69, 105, 0.6);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+}
+
+.btn-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover .btn-shine {
+    left: 100%;
+}
+
+/* ===== Feedback ===== */
+.feedback {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-sm);
+    border-radius: 10px;
+    font-weight: 500;
+    text-align: center;
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.feedback.show {
+    opacity: 1;
+}
+
+.feedback.success {
+    background: rgba(46, 213, 115, 0.2);
+    color: #0c7c3c;
+}
+
+.feedback.error {
+    background: rgba(255, 71, 87, 0.2);
+    color: #c0392b;
+}
+
+/* ===== Birthday Reveal ===== */
+.birthday-card {
+    max-width: 700px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    padding: var(--spacing-xl);
+    box-shadow: 0 20px 60px rgba(142, 68, 173, 0.3);
+    animation: revealCard 1s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.birthday-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('assets/card-bg.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+    z-index: 0;
+}
+
+.card-content {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes revealCard {
+    from {
+        opacity: 0;
+        transform: scale(0.8) rotateY(90deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotateY(0);
+    }
+}
+
+.reveal-title {
+    font-family: var(--font-fancy);
+    font-size: 3rem;
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple), var(--secondary-lavender));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: var(--spacing-lg);
+    animation: titlePulse 2s ease-in-out infinite;
+}
+
+@keyframes titlePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.teddy-container {
+    text-align: center;
+    margin: var(--spacing-lg) 0;
+}
+
+.teddy-image {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    animation: teddyFloat 3s ease-in-out infinite;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+}
+
+@keyframes teddyFloat {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-15px) rotate(2deg); }
+}
+
+.birthday-message {
+    text-align: center;
+    margin: var(--spacing-lg) 0;
+}
+
+.message-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: var(--spacing-md);
+}
+
+.message-signature {
+    font-family: var(--font-fancy);
+    font-size: 1.5rem;
+    color: var(--primary-purple);
+    margin-top: var(--spacing-lg);
+}
+
+.celebration-emojis {
+    font-size: 2rem;
+    text-align: center;
+    margin-top: var(--spacing-lg);
+    animation: emojiDance 1s ease-in-out infinite;
+}
+
+@keyframes emojiDance {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+    .birthday-title {
+        font-size: 2rem;
+    }
+    
+    .question-text {
+        font-size: 1.4rem;
+    }
+    
+    .reveal-title {
+        font-size: 2rem;
+    }
+    
+    .glass-card {
+        padding: var(--spacing-lg);
+    }
+    
+    .teddy-image {
+        max-width: 200px;
+    }
+    
+    .message-text {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .birthday-title {
+        font-size: 1.5rem;
+    }
+    
+    .question-text {
+        font-size: 1.2rem;
+    }
+    
+    .option-btn {
+        font-size: 1rem;
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+}

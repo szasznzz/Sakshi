@@ -1,0 +1,29 @@
+{
+    "name": "coindrop",
+    "version": "1.0.0",
+    "description": "Skill-based Web3 physics game on Monad blockchain",
+    "main": "server-simple.js",
+    "scripts": {
+        "start": "node server-simple.js",
+        "backend": "cd backend && node server-standalone.js",
+        "dev": "node server-simple.js"
+    },
+    "keywords": [
+        "web3",
+        "blockchain",
+        "game",
+        "physics",
+        "monad",
+        "ethereum",
+        "solidity"
+    ],
+    "author": "",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/YOUR_USERNAME/coindrop.git"
+    },
+    "engines": {
+        "node": ">=16.0.0"
+    }
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoinDrop - Library Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #0a0e27;
+            color: white;
+        }
+
+        .status {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .success {
+            background: #10b981;
+        }
+
+        .error {
+            background: #ef4444;
+        }
+
+        .warning {
+            background: #f59e0b;
+        }
+
+        pre {
+            background: #1a1e37;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        button {
+            background: #6366f1;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+
+        button:hover {
+            background: #4f46e5;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🔍 CoinDrop Library Diagnostic</h1>
+    <p>This page tests if the required libraries can load properly.</p>
+
+    <div id="status"></div>
+    <div id="details"></div>
+
+    <button onclick="location.reload()">Refresh Test</button>
+    <button onclick="location.href='index.html'">Go to Game</button>
+
+    <script>
+        const statusDiv = document.getElementById('status');
+        const detailsDiv = document.getElementById('details');
+        let checkCount = 0;
+        const maxChecks = 20;
+
+        function updateStatus() {
+            checkCount++;
+
+            const ethersLoaded = typeof ethers !== 'undefined';
+            const matterLoaded = typeof Matter !== 'undefined';
+
+            let html = '<h2>Library Status (Check #' + checkCount + ')</h2>';
+
+            html += '<div class="status ' + (ethersLoaded ? 'success' : 'error') + '">';
+            html += ethersLoaded ? '✓ ethers.js LOADED' : '✗ ethers.js NOT LOADED';
+            html += '</div>';
+
+            html += '<div class="status ' + (matterLoaded ? 'success' : 'error') + '">';
+            html += matterLoaded ? '✓ Matter.js LOADED' : '✗ Matter.js NOT LOADED';
+            html += '</div>';
+
+            if (ethersLoaded && matterLoaded) {
+                html += '<div class="status success">✓ ALL LIBRARIES READY!</div>';
+                html += '<p>The game should work. Click "Go to Game" to play.</p>';
+
+                detailsDiv.innerHTML = '<h3>Library Details:</h3><pre>' +
+                    'ethers version: ' + (ethers.version || 'unknown') + '\n' +
+                    'Matter version: ' + (Matter.version || 'unknown') +
+                    '</pre>';
+
+                clearInterval(checkInterval);
+            } else if (checkCount >= maxChecks) {
+                html += '<div class="status error">✗ LIBRARIES FAILED TO LOAD</div>';
+                html += '<h3>Troubleshooting:</h3>';
+                html += '<ul>';
+                html += '<li>Check your internet connection</li>';
+                html += '<li>Disable ad blockers or browser extensions</li>';
+                html += '<li>Try a different browser</li>';
+                html += '<li>Check if CDNs are accessible in your region</li>';
+                html += '</ul>';
+
+                detailsDiv.innerHTML = '<h3>Console Errors:</h3>' +
+                    '<p>Open browser console (F12) to see detailed error messages.</p>';
+
+                clearInterval(checkInterval);
+            }
+
+            statusDiv.innerHTML = html;
+        }
+
+        // Check immediately
+        updateStatus();
+
+        // Keep checking
+        const checkInterval = setInterval(updateStatus, 500);
+    </script>
+
+    <!-- Load libraries -->
+    <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js" crossorigin="anonymous"
+        onload="console.log('✓ ethers.js script tag loaded from unpkg')"
+        onerror="console.error('✗ ethers.js script tag failed to load from unpkg')"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js" crossorigin="anonymous"
+        onload="console.log('✓ Matter.js script tag loaded')"
+        onerror="console.error('✗ Matter.js script tag failed to load')"></script>
+</body>
+
+</html>
